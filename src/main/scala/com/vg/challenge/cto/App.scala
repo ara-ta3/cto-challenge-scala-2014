@@ -4,9 +4,7 @@ object App extends App {
 
   def selectOptimalCoupons(amount:Int, myCouponList:List[Int]):List[Int] = {
     var retList = filterUnablableCoupons(amount, myCouponList)
-    retList = useCoupons(amount, retList)
-    println(retList)
-    retList
+    useCoupons(amount, retList)
   }
 
   def filterUnablableCoupons(amount:Int, couponList:List[Int]):List[Int] = couponList.filter(_ <= amount)
@@ -27,9 +25,4 @@ object App extends App {
 
     retCoupons
   }
-
-  selectOptimalCoupons(100, List())
-  selectOptimalCoupons(100, List(50,50,100))
-  selectOptimalCoupons(470, List(50,50,50,100,100,100,100,100,100,500))
-  selectOptimalCoupons(1230, List(50,50,50,50,50,50,100,100,100,100,100,100,500,500))
 }
