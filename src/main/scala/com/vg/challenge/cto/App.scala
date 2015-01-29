@@ -4,21 +4,32 @@ object App extends App {
 
   def selectOptimalCoupons(amount:Int, myCouponList:List[Int]):List[Int] = {
     var retList = filterUnablableCoupons(amount, myCouponList)
-    createSolution(retList)
+    retList = useCoupons(amount, retList)
     println(retList)
-    List()
+    retList
   }
 
   def filterUnablableCoupons(amount:Int, couponList:List[Int]):List[Int] = couponList.filter(_ <= amount)
 
-  def createSolution(couponList:List[Int]):List[Solution] = {
-    var ret = List[Solution]()
+  def useCoupons(amount:Int, couponList:List[Int]):List[Int] = {
+    var sorted:List[Int] = couponList.sorted(Ordering[Int].reverse)
+    var rest:Int = amount
+    var retCoupons:List[Int] = List()
 
-    List()
+    while( rest > 0 && !sorted.isEmpty ) {
+      var used = sorted.head
+      sorted = sorted.tail
+      if ( rest - used > 0 ) {
+        rest -= used 
+        retCoupons = used :: retCoupons
+      }
+    }
+
+    retCoupons
   }
 
   selectOptimalCoupons(100, List())
   selectOptimalCoupons(100, List(50,50,100))
-  selectOptimalCoupons(100, List(50,50,50,100,100,100,100,100,100,500))
-  selectOptimalCoupons(100, List(50,50,50,50,50,50,100,100,100,100,100,100,500,500))
+  selectOptimalCoupons(470, List(50,50,50,100,100,100,100,100,100,500))
+  selectOptimalCoupons(1230, List(50,50,50,50,50,50,100,100,100,100,100,100,500,500))
 }
