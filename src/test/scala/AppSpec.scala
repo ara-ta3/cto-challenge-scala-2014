@@ -3,7 +3,7 @@ import org.scalatest.Matchers._
 
 import com.vg.challenge.cto.App
 
-class Sample1Spec extends FunSpec {
+class AppSpec extends FunSpec {
   describe("App全体") {
     it("仕様1") {
       var actual = App.selectOptimalCoupons(100, List())
